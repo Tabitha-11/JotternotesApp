@@ -1,0 +1,18 @@
+.btnWrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.formWrapper {
+    width: 100%
+}
+
+.titleField {
+    width: 100%;
+}
+
+.noteField {
+    width: 100%;
+}

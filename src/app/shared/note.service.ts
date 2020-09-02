@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
-import { INote } from './interface';
+import { IListDialogue, INote } from './interface';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
@@ -24,7 +24,6 @@ export class NoteService {
         map((val: SnapshotAction<INote>[]) => {
           return val.map((action: SnapshotAction<INote>) => {
             const $key = action.payload.key;
-            console.log({ $key, ...action.payload.val() });
             return { $key, ...action.payload.val() };
           });
         }),
@@ -36,7 +35,16 @@ export class NoteService {
       );
   }
 
-  updateNote(noteId: string, newNote: INote) {}
+  updateNote(key: string, newNote: IListDialogue) {
+    console.log(newNote);
+    return this.afd.list('notes').update(key, {
+      title: newNote.title,
+      body: newNote.body,
+      date: newNote.date
+    });
+  }
 
-  deleteNote(noteId: string) {}
+  deleteNote(noteId: string) {
+    return this.afd.list('notes').remove(noteId);
+  }
 }

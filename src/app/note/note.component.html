@@ -24,6 +24,7 @@
 <br>
 <!-- Output -->
 <mat-divider></mat-divider>
+
 <h1 style="margin:16px 0px">
     <b>Your notes</b>
 </h1>
@@ -45,11 +46,11 @@
             <mat-icon>more_vert</mat-icon>
         </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="onDelete(note.$key)">
               <mat-icon>delete</mat-icon>
               <span>Delete</span>
             </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="onEdit(note.$key)">
               <mat-icon>edit</mat-icon>
               <span>Update</span>
             </button>

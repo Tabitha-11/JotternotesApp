@@ -1,0 +1,19 @@
+<form [formGroup]="dialogForm" class="formWrapper">
+    <mat-form-field appearance="outline" class="titleField">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Enter the Title" formControlName="title">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline" class="noteField">
+        <mat-label>Your Note</mat-label>
+        <textarea matInput placeholder="Enter Your Note" formControlName="body" style="height:200px"></textarea>
+    </mat-form-field>
+    <br>
+</form>
+
+<div class="btnWrapper">
+
+    <button mat-flat-button (click)="onCancel()" style="margin:0px 30px">Cancel</button>
+    <button mat-flat-button color="primary" (click)="onUpdatNote()" [disabled]="!dialogForm.valid || dialogForm.pristine">Update Note</button>
+
+</div>
