@@ -1,0 +1,67 @@
+<!-- Input form -->
+<h1 style="margin:16px 0px">
+    <b>Create a note</b>
+</h1>
+<form [formGroup]="myForm" class="formWrapper">
+    <mat-form-field appearance="outline" class="titleField">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Enter the Title" formControlName="title">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline" class="noteField">
+        <mat-label>Your Note</mat-label>
+        <textarea matInput placeholder="Enter Your Note" formControlName="body" style="height:200px"></textarea>
+    </mat-form-field>
+    <br>
+</form>
+
+<div class="btnWrapper">
+    <button mat-flat-button color="primary" (click)="onPostNote()" [disabled]="!myForm.valid || myForm.pristine">Post Note</button>
+</div>
+
+<br>
+
+<br>
+<!-- Output -->
+<mat-divider></mat-divider>
+<h1 style="margin:16px 0px">
+    <b>Your notes</b>
+</h1>
+<mat-divider></mat-divider>
+
+<ng-template #loading>
+    <p>Loading...</p>
+</ng-template>
+
+<ng-container *ngIf="allNotes | async;let notes;else loading">
+    <mat-list>
+        <!-- <div mat-subheader>Today</div> -->
+        <ng-container *ngFor="let note of notes">
+            <mat-list-item>
+                <div mat-line>
+                    <span><b>{{note.title}}</b></span>
+                </div>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+                    <button mat-menu-item>
+              <mat-icon>edit</mat-icon>
+              <span>Update</span>
+            </button>
+                </mat-menu>
+
+                <div mat-line>
+                    <span>{{note.body}}</span>
+                </div>
+
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </ng-container>
+
+    </mat-list>
+</ng-container>
